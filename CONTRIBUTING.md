@@ -13,7 +13,7 @@ New Install Steps:
    docker run -it -v /path/to/the/webgpt/gpt4all/backend:/src emscripten/emsdk /bin/bash
    mkdir build
    cd build
-   emcmake cmake ..
+   cmake .. # this works, while this does not: emcmake cmake ..
    emmake make
    ```
 
