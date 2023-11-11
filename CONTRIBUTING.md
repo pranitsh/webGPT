@@ -2,8 +2,10 @@ The source: https://developer.mozilla.org/en-US/docs/WebAssembly/C_to_Wasm#creat
 https://emscripten.org/docs/compiling/Building-Projects.html?highlight=makefile
 
 Steps:
-1. Download this repo: https://github.com/emscripten-core/emsdk
-2. Hopefully this download process works for you: https://emscripten.org/docs/getting_started/downloads.html
+1. Before you begin, verify you have the correct version of cmake, make, and c. If your cmake is below `3.16`, this will not work.
+   1. Download it from here: https://cmake.org/download/
+2. Download this repo: https://github.com/emscripten-core/emsdk
+3. Hopefully this download process works for you: https://emscripten.org/docs/getting_started/downloads.html
    1. Setting up for windows involves the below statements
       ```sh
       ./emsdk.bat install latest
@@ -11,15 +13,15 @@ Steps:
       ./emsdk_env.bat
       ```
    2. Please put your macOS code...
-3. For the next steps, you have to find the path to the cmake in emsdk. This is located at the below:
+4. For the next steps, you have to find the path to the cmake in emsdk. This is located at the below:
    C:\Users\ppsha\Documents\GitHub\webgpt\emsdk\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake
    It should be located at the same place following linux-styled paths.
-4. You have run this from inside of the build directory for cmake to see your `CmakeLists.txt`
+5. You have run this from inside of the build directory for cmake to see your `CmakeLists.txt`
    ```sh
    mkdir build
    cd build
    ```
-5. You then have to install cmake
+6. You then have to install cmake
    1. For windows, this means running the below with elevated permissions.
       ```sh
       cmake -DCMAKE_TOOLCHAIN_FILE=C:\Users\ppsha\Documents\GitHub\webgpt\emsdk\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake ..
