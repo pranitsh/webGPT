@@ -12,8 +12,21 @@ Steps:
       ./emsdk.bat activate latest
       ./emsdk_env.bat
       ```
-   2. Please put your macOS code...
-4. For the next steps, you have to find the path to the cmake in emsdk. This is located at the below:
+   2. For macOS, the setup follows: 
+      ```sh
+      git clone https://github.com/emscripten-core/emsdk.git
+      # Enter that directory
+      cd emsdk
+      # Fetch the latest version of the emsdk (not needed the first time you clone)
+      git pull
+      # Download and install the latest SDK tools.
+      ./emsdk install latest
+      # Make the "latest" SDK "active" for the current user. (writes .emscripten file)
+      ./emsdk activate latest
+      # Activate PATH and other environment variables in the current terminal
+      source ./emsdk_env.sh      
+      ```
+3. For the next steps, you have to find the path to the cmake in emsdk. This is located at the below:
    C:\Users\ppsha\Documents\GitHub\webgpt\emsdk\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake
    It should be located at the same place following linux-styled paths.
 5. You have run this from inside of the build directory for cmake to see your `CmakeLists.txt`
@@ -26,7 +39,8 @@ Steps:
       ```sh
       cmake -DCMAKE_TOOLCHAIN_FILE=C:\Users\ppsha\Documents\GitHub\webgpt\emsdk\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake ..
       ```
-
+   2. For mac, this means installing
+      
 I'll focus on compiling it.
 You'll focus on website implementation details.
 
