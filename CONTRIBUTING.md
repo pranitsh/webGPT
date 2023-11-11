@@ -39,7 +39,12 @@ Steps:
       ```sh
       cmake -DCMAKE_TOOLCHAIN_FILE=C:\Users\ppsha\Documents\GitHub\webgpt\emsdk\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake ..
       ```
-   2. For mac, this means installing 
+   2. For mac, this means installing
+      ```brew
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      and then cmake brew install
+      cmake
+      ``` 
 
 Github pages
 1. I simply turned on github pages.
