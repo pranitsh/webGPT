@@ -2,7 +2,21 @@ The source: https://developer.mozilla.org/en-US/docs/WebAssembly/C_to_Wasm#creat
 https://www.continuation-labs.com/projects/d3wasm/#source-code
 https://emscripten.org/docs/compiling/Building-Projects.html?highlight=makefile
 
-Steps:
+New Install Steps:
+1. Install docker at https://docs.docker.com/engine/install/
+2. Run the below command to get the image
+   ```sh
+   docker pull emscripten/emsdk
+   ```
+3. Then compile with the below command
+   ```sh
+   mkdir build-wasm
+   cd build-wasm
+   docker run emscripten/emsdk emcmake cmake ..
+   emmake make
+   ```
+
+Old Steps:
 1. Before you begin, verify you have the correct version of cmake, make, and c. If your cmake is below `3.16`, this will not work.
    1. Download it from here: https://cmake.org/download/
 2. Download this repo: https://github.com/emscripten-core/emsdk
@@ -27,7 +41,7 @@ Steps:
       # Activate PATH and other environment variables in the current terminal
       source ./emsdk_env.sh      
       ```
-3. For the next steps, you have to find the path to the cmake in emsdk. This is located at the below:
+4. For the next steps, you have to find the path to the cmake in emsdk. This is located at the below:
    C:\Users\ppsha\Documents\GitHub\webgpt\emsdk\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake
    It should be located at the same place following linux-styled paths.
 5. You have run this from inside of the build directory for cmake to see your `CmakeLists.txt`
