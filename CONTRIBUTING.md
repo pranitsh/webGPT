@@ -2,6 +2,9 @@ The source: https://developer.mozilla.org/en-US/docs/WebAssembly/C_to_Wasm#creat
 https://www.continuation-labs.com/projects/d3wasm/#source-code
 https://emscripten.org/docs/compiling/Building-Projects.html?highlight=makefile
 
+
+https://blog.stackademic.com/fast-and-portable-llama2-inference-on-the-heterogeneous-edge-a62508e82359
+
 New Install Steps:
 1. Install docker at https://docs.docker.com/engine/install/
 2. Run the below command to get the image:
