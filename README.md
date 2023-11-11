@@ -1,2 +1,2 @@
 # webgpt
- Running gpt4all models on web through wasm
+Running gpt4all models on web through wasm
