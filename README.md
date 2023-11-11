@@ -3,16 +3,12 @@ Running gpt4all models on web through wasm
 
 
 ## Directory Structure
-- gpt4all-api
-    - RESTful API
 - gpt4all-backend
     - C/C++ (ggml) model backends
 - gpt4all-bindings
     - Language bindings for model backends
 - gpt4all-chat
     - Chat GUI
-- gpt4all-docker
-    - Dockerfile recipes for various gpt4all builds
 - gpt4all-training
     - Model training/inference/eval code
 
