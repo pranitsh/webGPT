@@ -14,7 +14,12 @@ Steps:
 3. For the next steps, you have to find the path to the cmake in emsdk. This is located at the below:
    C:\Users\ppsha\Documents\GitHub\webgpt\emsdk\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake
    It should be located at the same place following linux-styled paths.
-4. You then have to install cmake
+4. You have run this from inside of the build directory for cmake to see your `CmakeLists.txt`
+   ```sh
+   mkdir build
+   cd build
+   ```
+5. You then have to install cmake
    1. For windows, this means running the below with elevated permissions.
       ```sh
       cmake -DCMAKE_TOOLCHAIN_FILE=C:\Users\ppsha\Documents\GitHub\webgpt\emsdk\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake ..

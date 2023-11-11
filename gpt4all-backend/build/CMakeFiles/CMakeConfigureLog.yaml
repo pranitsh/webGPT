@@ -405,3 +405,348 @@ events:
         
       exitCode: 1
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CheckIPOSupported.cmake:138 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CheckIPOSupported.cmake:266 (_ipo_run_language_check)"
+      - "CMakeLists.txt:35 (check_ipo_supported)"
+    directories:
+      source: "C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/src"
+      binary: "C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/bin"
+    buildResult:
+      variable: "_IPO_LANGUAGE_CHECK_RESULT"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/bin'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.7.2+d6990bcfa for .NET Framework
+        Build started 11/11/2023 2:19:30 AM.
+        
+        Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (1) is building "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ZERO_CHECK.vcxproj" (2) on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "x64\\Debug\\ZERO_CHECK\\".
+          Creating directory "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\".
+        InitializeBuildStatus:
+          Creating "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          1>Checking Build System
+        FinalizeBuildStatus:
+          Deleting file "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild".
+          Touching "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\ZERO_CHECK.lastbuildstate".
+        Done Building Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ZERO_CHECK.vcxproj" (default targets).
+        Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (1) is building "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (3) on node 1 (default targets).
+        Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (3) is building "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (4) on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "foo.dir\\Debug\\".
+          Creating directory "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\".
+          Creating directory "foo.dir\\Debug\\foo.tlog\\".
+        InitializeBuildStatus:
+          Creating "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          Building Custom Rule C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /W1 /WX- /diagnostics:column /O2 /GL /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"foo.dir\\Debug\\\\" /Fd"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\libfoo.pdb" /external:W1 /Gd /TP /errorReport:queue  -g "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\foo.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.37.32825 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          foo.cpp
+          cl /c /W1 /WX- /diagnostics:column /O2 /GL /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"foo.dir\\Debug\\\\" /Fd"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\libfoo.pdb" /external:W1 /Gd /TP /errorReport:queue  -g "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\foo.cpp"
+        cl : command line  warning D9002: ignoring unknown option '-g' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj]
+        Lib:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\Lib.exe /OUT:"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\libfoo.a" /NOLOGO /MACHINE:X64 /LTCG foo.dir\\Debug\\foo.obj
+          foo.vcxproj -> C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\libfoo.a
+        FinalizeBuildStatus:
+          Deleting file "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild".
+          Touching "foo.dir\\Debug\\foo.tlog\\foo.lastbuildstate".
+        Done Building Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (default targets).
+        PrepareForBuild:
+          Creating directory "boo.dir\\Debug\\".
+          Creating directory "boo.dir\\Debug\\boo.tlog\\".
+        InitializeBuildStatus:
+          Creating "boo.dir\\Debug\\boo.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "boo.dir\\Debug\\boo.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          Building Custom Rule C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /W1 /WX- /diagnostics:column /O2 /GL /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"boo.dir\\Debug\\\\" /Fd"boo.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue  -g "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\main.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.37.32825 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /W1 /WX- /diagnostics:column /O2 /GL /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"boo.dir\\Debug\\\\" /Fd"boo.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue  -g "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\main.cpp"
+        cl : command line  warning D9002: ignoring unknown option '-g' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+          main.cpp
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\boo.js" /NOLOGO Debug\\libfoo.a /MANIFEST:NO /PDB:"C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/bin/Debug/boo.pdb" /SUBSYSTEM:CONSOLE /LTCG:incremental /LTCGOUT:"boo.dir\\Debug\\boo.iobj" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\boo.lib" /MACHINE:X64  --default-obj-ext .obj boo.dir\\Debug\\main.obj
+        LINK : warning LNK4044: unrecognized option '/-default-obj-ext'; ignored [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        LINK : fatal error LNK1181: cannot open input file '.obj' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        Done Building Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default targets) -- FAILED.
+        Done Building Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default target) (1) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default target) (3) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (default target) (4) ->
+        (ClCompile target) -> 
+          cl : command line  warning D9002: ignoring unknown option '-g' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj]
+        
+        
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default target) (1) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default target) (3) ->
+          cl : command line  warning D9002: ignoring unknown option '-g' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        
+        
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default target) (1) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default target) (3) ->
+        (Link target) -> 
+          LINK : warning LNK4044: unrecognized option '/-default-obj-ext'; ignored [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        
+        
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default target) (1) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default target) (3) ->
+        (Link target) -> 
+          LINK : fatal error LNK1181: cannot open input file '.obj' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        
+            3 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:01.49
+        
+      exitCode: 1
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CheckIPOSupported.cmake:138 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CheckIPOSupported.cmake:266 (_ipo_run_language_check)"
+      - "CMakeLists.txt:35 (check_ipo_supported)"
+    directories:
+      source: "C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/src"
+      binary: "C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/bin"
+    buildResult:
+      variable: "_IPO_LANGUAGE_CHECK_RESULT"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/bin'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.7.2+d6990bcfa for .NET Framework
+        Build started 11/11/2023 2:20:11 AM.
+        
+        Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (1) is building "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ZERO_CHECK.vcxproj" (2) on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "x64\\Debug\\ZERO_CHECK\\".
+          Creating directory "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\".
+        InitializeBuildStatus:
+          Creating "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          1>Checking Build System
+        FinalizeBuildStatus:
+          Deleting file "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild".
+          Touching "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\ZERO_CHECK.lastbuildstate".
+        Done Building Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ZERO_CHECK.vcxproj" (default targets).
+        Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (1) is building "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (3) on node 1 (default targets).
+        Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (3) is building "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (4) on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "foo.dir\\Debug\\".
+          Creating directory "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\".
+          Creating directory "foo.dir\\Debug\\foo.tlog\\".
+        InitializeBuildStatus:
+          Creating "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          Building Custom Rule C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /W1 /WX- /diagnostics:column /O2 /GL /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"foo.dir\\Debug\\\\" /Fd"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\libfoo.pdb" /external:W1 /Gd /TP /errorReport:queue  -g "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\foo.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.37.32825 for x64
+          foo.cpp
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /W1 /WX- /diagnostics:column /O2 /GL /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"foo.dir\\Debug\\\\" /Fd"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\libfoo.pdb" /external:W1 /Gd /TP /errorReport:queue  -g "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\foo.cpp"
+        cl : command line  warning D9002: ignoring unknown option '-g' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj]
+        Lib:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\Lib.exe /OUT:"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\libfoo.a" /NOLOGO /MACHINE:X64 /LTCG foo.dir\\Debug\\foo.obj
+          foo.vcxproj -> C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\libfoo.a
+        FinalizeBuildStatus:
+          Deleting file "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild".
+          Touching "foo.dir\\Debug\\foo.tlog\\foo.lastbuildstate".
+        Done Building Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (default targets).
+        PrepareForBuild:
+          Creating directory "boo.dir\\Debug\\".
+          Creating directory "boo.dir\\Debug\\boo.tlog\\".
+        InitializeBuildStatus:
+          Creating "boo.dir\\Debug\\boo.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "boo.dir\\Debug\\boo.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          Building Custom Rule C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /W1 /WX- /diagnostics:column /O2 /GL /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"boo.dir\\Debug\\\\" /Fd"boo.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue  -g "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\main.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.37.32825 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /W1 /WX- /diagnostics:column /O2 /GL /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"boo.dir\\Debug\\\\" /Fd"boo.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue  -g "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\main.cpp"
+        cl : command line  warning D9002: ignoring unknown option '-g' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+          main.cpp
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\boo.js" /NOLOGO Debug\\libfoo.a /MANIFEST:NO /PDB:"C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/bin/Debug/boo.pdb" /SUBSYSTEM:CONSOLE /LTCG:incremental /LTCGOUT:"boo.dir\\Debug\\boo.iobj" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\boo.lib" /MACHINE:X64  --default-obj-ext .obj boo.dir\\Debug\\main.obj
+        LINK : warning LNK4044: unrecognized option '/-default-obj-ext'; ignored [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        LINK : fatal error LNK1181: cannot open input file '.obj' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        Done Building Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default targets) -- FAILED.
+        Done Building Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default target) (1) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default target) (3) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (default target) (4) ->
+        (ClCompile target) -> 
+          cl : command line  warning D9002: ignoring unknown option '-g' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj]
+        
+        
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default target) (1) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default target) (3) ->
+          cl : command line  warning D9002: ignoring unknown option '-g' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        
+        
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default target) (1) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default target) (3) ->
+        (Link target) -> 
+          LINK : warning LNK4044: unrecognized option '/-default-obj-ext'; ignored [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        
+        
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default target) (1) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default target) (3) ->
+        (Link target) -> 
+          LINK : fatal error LNK1181: cannot open input file '.obj' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        
+            3 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:01.29
+        
+      exitCode: 1
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CheckIPOSupported.cmake:138 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.28/Modules/CheckIPOSupported.cmake:266 (_ipo_run_language_check)"
+      - "CMakeLists.txt:35 (check_ipo_supported)"
+    directories:
+      source: "C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/src"
+      binary: "C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/bin"
+    buildResult:
+      variable: "_IPO_LANGUAGE_CHECK_RESULT"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/bin'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.7.2+d6990bcfa for .NET Framework
+        Build started 11/11/2023 2:20:20 AM.
+        
+        Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (1) is building "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ZERO_CHECK.vcxproj" (2) on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "x64\\Debug\\ZERO_CHECK\\".
+          Creating directory "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\".
+        InitializeBuildStatus:
+          Creating "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          1>Checking Build System
+        FinalizeBuildStatus:
+          Deleting file "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\unsuccessfulbuild".
+          Touching "x64\\Debug\\ZERO_CHECK\\ZERO_CHECK.tlog\\ZERO_CHECK.lastbuildstate".
+        Done Building Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ZERO_CHECK.vcxproj" (default targets).
+        Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (1) is building "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (3) on node 1 (default targets).
+        Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (3) is building "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (4) on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "foo.dir\\Debug\\".
+          Creating directory "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\".
+          Creating directory "foo.dir\\Debug\\foo.tlog\\".
+        InitializeBuildStatus:
+          Creating "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          Building Custom Rule C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /W1 /WX- /diagnostics:column /O2 /GL /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"foo.dir\\Debug\\\\" /Fd"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\libfoo.pdb" /external:W1 /Gd /TP /errorReport:queue  -g "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\foo.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.37.32825 for x64
+          foo.cpp
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /W1 /WX- /diagnostics:column /O2 /GL /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"foo.dir\\Debug\\\\" /Fd"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\libfoo.pdb" /external:W1 /Gd /TP /errorReport:queue  -g "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\foo.cpp"
+        cl : command line  warning D9002: ignoring unknown option '-g' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj]
+        Lib:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\Lib.exe /OUT:"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\libfoo.a" /NOLOGO /MACHINE:X64 /LTCG foo.dir\\Debug\\foo.obj
+          foo.vcxproj -> C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\libfoo.a
+        FinalizeBuildStatus:
+          Deleting file "foo.dir\\Debug\\foo.tlog\\unsuccessfulbuild".
+          Touching "foo.dir\\Debug\\foo.tlog\\foo.lastbuildstate".
+        Done Building Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (default targets).
+        PrepareForBuild:
+          Creating directory "boo.dir\\Debug\\".
+          Creating directory "boo.dir\\Debug\\boo.tlog\\".
+        InitializeBuildStatus:
+          Creating "boo.dir\\Debug\\boo.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "boo.dir\\Debug\\boo.tlog\\unsuccessfulbuild".
+        CustomBuild:
+          Building Custom Rule C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/src/CMakeLists.txt
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /W1 /WX- /diagnostics:column /O2 /GL /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"boo.dir\\Debug\\\\" /Fd"boo.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue  -g "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\main.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.37.32825 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /W1 /WX- /diagnostics:column /O2 /GL /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"boo.dir\\Debug\\\\" /Fd"boo.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue  -g "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\src\\main.cpp"
+        cl : command line  warning D9002: ignoring unknown option '-g' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+          main.cpp
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\boo.js" /NOLOGO Debug\\libfoo.a /MANIFEST:NO /PDB:"C:/Users/ppsha/Documents/GitHub/webgpt/gpt4all-backend/build/CMakeFiles/_CMakeLTOTest-CXX/bin/Debug/boo.pdb" /SUBSYSTEM:CONSOLE /LTCG:incremental /LTCGOUT:"boo.dir\\Debug\\boo.iobj" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\Debug\\boo.lib" /MACHINE:X64  --default-obj-ext .obj boo.dir\\Debug\\main.obj
+        LINK : warning LNK4044: unrecognized option '/-default-obj-ext'; ignored [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        LINK : fatal error LNK1181: cannot open input file '.obj' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        Done Building Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default targets) -- FAILED.
+        Done Building Project "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default target) (1) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default target) (3) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj" (default target) (4) ->
+        (ClCompile target) -> 
+          cl : command line  warning D9002: ignoring unknown option '-g' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\foo.vcxproj]
+        
+        
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default target) (1) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default target) (3) ->
+          cl : command line  warning D9002: ignoring unknown option '-g' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        
+        
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default target) (1) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default target) (3) ->
+        (Link target) -> 
+          LINK : warning LNK4044: unrecognized option '/-default-obj-ext'; ignored [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        
+        
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\ALL_BUILD.vcxproj" (default target) (1) ->
+        "C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj" (default target) (3) ->
+        (Link target) -> 
+          LINK : fatal error LNK1181: cannot open input file '.obj' [C:\\Users\\ppsha\\Documents\\GitHub\\webgpt\\gpt4all-backend\\build\\CMakeFiles\\_CMakeLTOTest-CXX\\bin\\boo.vcxproj]
+        
+            3 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:01.10
+        
+      exitCode: 1
+...
