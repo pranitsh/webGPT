@@ -11,3 +11,7 @@ Steps:
 I'll focus on compiling it.
 You'll focus on website implementation details.
 
+Github pages
+1. I simply turned on github pages.
+2. /main/index.html should exit (else rename hello.html or whatever the output was)
+3. Open up the website at https://pranitsh.github.io/webgpt/
