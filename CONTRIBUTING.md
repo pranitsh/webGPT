@@ -1,4 +1,5 @@
 The source: https://developer.mozilla.org/en-US/docs/WebAssembly/C_to_Wasm#creating_html_and_javascript
+https://emscripten.org/docs/compiling/Building-Projects.html?highlight=makefile
 
 Steps:
 1. Download this repo: https://github.com/emscripten-core/emsdk
