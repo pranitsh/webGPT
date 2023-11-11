@@ -39,6 +39,19 @@ set(BUILD_SHARED_LIBS ON)
 #!PS1    message(STATUS "Interprocedural optimization support detected")
 #!PS1 endif()
 
+#!PS2
+# Check if we are using Emscripten
+if(EMSCRIPTEN)
+    # Add pthread flag for the compiler
+    add_compile_options(-pthread)
+
+    # Set linker flags for pthreads and optionally set pthread pool size
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread -s USE_PTHREADS=1 -sPTHREAD_POOL_SIZE=4")
+
+    # Additional Emscripten-specific settings can go here
+endif()
+
+
 if(NOT APPLE)
   set(LLAMA_KOMPUTE YES)
 endif()
