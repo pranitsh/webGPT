@@ -10,10 +10,11 @@ New Install Steps:
    ```
 3. Then run the commands through the interactive mode of the image:
    ```sh
-   docker run -it -v /path/to/the/webgpt/gpt4all/backend:/src emscripten/emsdk /bin/bash
+   cd gpt4all-wasm/gpt4all-backend # this is the path to folder that contains the `CMakeLists.txt`
+   docker run -it -v .:/src emscripten/emsdk /bin/bash
    mkdir build
    cd build
-   cmake .. # this works, while this does not: emcmake cmake ..
+   emcmake cmake ..
    emmake make
    ```
 
