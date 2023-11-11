@@ -19,18 +19,11 @@ else()
     set(LLAMA_STANDALONE OFF)
 endif()
 
-if (EMSCRIPTEN)
+if (MINGW)
     set(BUILD_SHARED_LIBS_DEFAULT OFF)
-
-    option(LLAMA_WASM_SINGLE_FILE "llama: embed WASM inside the generated llama.js" ON)
 else()
-    if (MINGW)
-        set(BUILD_SHARED_LIBS_DEFAULT OFF)
-    else()
-        set(BUILD_SHARED_LIBS_DEFAULT ON)
-    endif()
+    set(BUILD_SHARED_LIBS_DEFAULT ON)
 endif()
-
 
 #
 # Option list
