@@ -4,15 +4,16 @@ https://emscripten.org/docs/compiling/Building-Projects.html?highlight=makefile
 
 New Install Steps:
 1. Install docker at https://docs.docker.com/engine/install/
-2. Run the below command to get the image
+2. Run the below command to get the image:
    ```sh
    docker pull emscripten/emsdk
    ```
-3. Then compile with the below command
+3. Then run the commands through the interactive mode of the image:
    ```sh
-   mkdir build-wasm
-   cd build-wasm
-   docker run emscripten/emsdk emcmake cmake ..
+   docker run -it -v /path/to/the/webgpt/gpt4all/backend:/src emscripten/emsdk /bin/bash
+   mkdir build
+   cd build
+   emcmake cmake ..
    emmake make
    ```
 
