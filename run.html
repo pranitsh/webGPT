@@ -34,6 +34,10 @@
     </div>
     <textarea id="output" rows="20" cols="80"></textarea>
     <p><span>achieved tok/s: </span><span id="toks"></span></p>
+    <div>    
+        <input type="file" id="fileInput" multiple>
+        <button onclick="handleFiles()">Load Files</button>
+    </div>
 </body>
 <script>
     // About this code
@@ -529,6 +533,22 @@
         await load_model(this.value + '.bin');
         generate();
     });
+
+    async function handleFiles() {
+        const fileInputElement = document.getElementById('fileInput');
+        const files = fileInputElement.files;
+        console.log("handling file");
+        if (files && files.length > 0) {
+            const checkpointFile = files[0]; // Only the checkpoint file is needed
+            console.log("Selected file: " + checkpointFile.name); // Log the name of the file
+            load_model(files[0].name);
+            console.log("Uploaded file without error");
+        }
+        else {
+            console.error("No checkpoint file selected");
+        }
+        generate();
+    }
 
     init();
 </script>

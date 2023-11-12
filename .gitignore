@@ -1,6 +1,7 @@
 /.vscode
 .DS_Store
 package-lock.json
+llama-2-7b-chat-q5_k_m.gguf
 
 # Logs
 logs
