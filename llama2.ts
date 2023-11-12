@@ -660,6 +660,78 @@ async function readFileOperations(checkpointFile) {
   return { config, weights, vocab, vocab_scores };
 }
 
+async function load_model(path) {
+  const response = await fetch(path);
+  const arrayBuffer = await response.arrayBuffer();
+  
+  let offset = 0;
+
+  var config = {
+      dim: 0, // transformer dimension
+      hidden_dim: 0, // for ffn layers
+      n_layers: 0, // number of layers
+      n_heads: 0, // number of query heads
+      n_kv_heads: 0, // number of key/value heads (can be < query heads because of multiquery)
+      vocab_size: 0, // vocabulary size, usually 256 (byte-level)
+      seq_len: 0, // max sequence length
+  };
+
+  let cfg_keys = Object.keys(config);
+  new Int32Array(arrayBuffer.slice(0, offset += 4 * cfg_keys.length)).forEach((v, i) => {
+      config[cfg_keys[i]] = v;
+  });
+
+  const p = config;
+  // negative vocab size is hacky way of signaling unshared weights. bit yikes.
+  const shared_weights = p.vocab_size > 0 ? 1 : 0;
+  p.vocab_size = Math.abs(p.vocab_size);
+  
+  // initialization: read from checkpoint
+  const head_size = p.dim / p.n_heads;
+  var weights = {
+      // token embedding table
+      token_embedding_table: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.vocab_size * p.dim)),
+      // weights for rmsnorms
+      rms_att_weight: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.n_layers * p.dim)),
+      // weights for matmuls
+      wq: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.n_layers * p.dim * p.dim)),
+      wk: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.n_layers * p.dim * p.dim)),
+      wv: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.n_layers * p.dim * p.dim)),
+      wo: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.n_layers * p.dim * p.dim)),
+      // weights for rmsnorms
+      rms_ffn_weight: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.n_layers * p.dim)),
+      // weights for ffn
+      w1: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.n_layers * p.dim * p.hidden_dim)),
+      w2: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.n_layers * p.dim * p.hidden_dim)),
+      w3: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.n_layers * p.dim * p.hidden_dim)),
+      // final rmsnorm
+      rms_final_weight: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.dim)),
+      // freq_cis for RoPE relatively positional embeddings
+      freq_cis_real: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.seq_len * head_size / 2)),
+      freq_cis_imag: new Float32Array(arrayBuffer.slice(offset, offset += 4 * p.seq_len * head_size / 2)),
+      // (optional) classifier weights for the logits, on the last layer
+      wcls: null,
+  };
+  weights.wcls = shared_weights ? weights.token_embedding_table : offset;
+
+  var run_state = {
+      // current wave of activations
+      x: new Float32Array(p.dim), // activation at current time stamp (dim,)
+      xb: new Float32Array(p.dim), // same, but inside a residual branch (dim,)
+      xb2: new Float32Array(p.dim), // an additional buffer just for convenience (dim,)
+      hb: new Float32Array(p.hidden_dim), // buffer for hidden dimension in the ffn (hidden_dim,)
+      hb2: new Float32Array(p.hidden_dim), // buffer for hidden dimension in the ffn (hidden_dim,)
+      q: new Float32Array(p.dim), // query (dim,)
+      k: new Float32Array(p.dim), // key (dim,)
+      v: new Float32Array(p.dim), // value (dim,)
+      att: new Float32Array(p.n_heads * p.seq_len), // buffer for scores/attention values (n_heads, seq_len)
+      logits: new Float32Array(p.vocab_size), // output logits
+      // kv cache
+      key_cache: new Float32Array(p.n_layers * p.seq_len * p.dim),   // (layer, seq_len, dim)
+      value_cache: new Float32Array(p.n_layers * p.seq_len * p.dim), // (layer, seq_len, dim)
+  };
+}
+
 // async function readFileOperations(combinedFile) {
 //   const configSize = 7 * i32bytes;
   
