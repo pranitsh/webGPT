@@ -11,27 +11,30 @@ type float = number;
 type int = number;
 const f32bytes = 4;
 const i32bytes = 4;
+
+
 class BufferReader {
   view: DataView;
   position: number;
-  constructor(buffer: Buffer) {
-    this.view = new DataView(buffer.buffer, buffer.byteOffset, buffer.byteLength);
+
+  constructor(arrayBuffer: ArrayBuffer) {
+    this.view = new DataView(arrayBuffer);
     this.position = 0;
   }
 
-  getInt32LE():int {
+  getInt32LE(): number {
     let value = this.view.getInt32(this.position, true);
-    this.position += i32bytes;
+    this.position += 4; // size of Int32 in bytes
     return value;
   }
 
-  getFloat32LE():float {
+  getFloat32LE(): number {
     let value = this.view.getFloat32(this.position, true);
-    this.position += f32bytes;
+    this.position += 4; // size of Float32 in bytes
     return value;
   }
 
-  getBytesInto(bytes: Uint8Array) {
+  getBytesInto(bytes: Uint8Array): Uint8Array {
     bytes.set(new Uint8Array(this.view.buffer, this.position, bytes.length));
     this.position += bytes.length;
     return bytes;
@@ -682,7 +685,7 @@ function main(config, weights, vocab, vocab_scores, prompt){
 
     // following BOS (1) token, sentencepiece decoder strips any leading whitespace (see PR#89)
     let token_str:string = (token == 1 && vocab[next].charAt(0) == ' ') ? vocab[next].substring(1) : vocab[next];
-    process.stdout.write(token_str); // note: assumes utf8 terminal
+    console.log(token_str); // note: assumes utf8 terminal
     token = next;
 
     // init the timer here because the first iteration can be slower
@@ -693,14 +696,14 @@ function main(config, weights, vocab, vocab_scores, prompt){
   console.log("\n\nachieved tok/s: %f\n", (pos - 1) / (Date.now() - start) * 1000.0);
 }
 
-function error_usage(): never {
-  console.error("Usage: ... llama2.ts <checkpoint> [options]");
-  console.error("Example: llama2.ts model.bin -n 256 -i \"Once upon a time\"");
-  console.error("Options:");
-  console.error("  -t <float>  temperature, default 1.0");
-  console.error("  -p <float>  p value in top-p (nucleus) sampling. default 0.9, 0 = off");
-  console.error("  -s <int>    random seed, default time(NULL)");
-  console.error("  -n <int>    number of steps to run for, default 256. 0 = max_seq_len");
-  console.error("  -i <string> input prompt");
-  process.exit(1);
-}
+// function error_usage(): never {
+//   console.error("Usage: ... llama2.ts <checkpoint> [options]");
+//   console.error("Example: llama2.ts model.bin -n 256 -i \"Once upon a time\"");
+//   console.error("Options:");
+//   console.error("  -t <float>  temperature, default 1.0");
+//   console.error("  -p <float>  p value in top-p (nucleus) sampling. default 0.9, 0 = off");
+//   console.error("  -s <int>    random seed, default time(NULL)");
+//   console.error("  -n <int>    number of steps to run for, default 256. 0 = max_seq_len");
+//   console.error("  -i <string> input prompt");
+//   process.exit(1);
+// }

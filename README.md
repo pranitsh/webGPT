@@ -1,15 +1,14 @@
 # webgpt
 Running gpt4all models on web through wasm
 
-
-## Directory Structure
-- gpt4all-wasm
-  - `STEPS.md`: includes steps for compiling and documents changes
-  - gpt4all-backend
-        - C/C++ (ggml) model backends
-  - gpt4all-training
-      - Model training/inference/eval code
-
-Plans:
-1. Compile with pthread on emsdk
-2. Compile other llama.cpp
+For the switch to typescript, run the below:
+1. Install npm from `https://nodejs.org/`
+2. Run the below to install typescript:
+   ```sh
+   npm install -g typescript
+   ```
+3. Run the below to create javascript from typescript in prep for the website.
+   ```sh
+   npm install
+   tsc llama2.ts -t es2022
+   ```

@@ -15,12 +15,5 @@
     "ml"
   ],
   "author": "wizzard0",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^20.4.0",
-    "undici-types": "^5.27.2"
-  },
-  "dependencies": {
-    "undici": "^5.27.2"
-  }
+  "license": "ISC"
 }
