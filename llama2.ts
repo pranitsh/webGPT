@@ -498,55 +498,55 @@ function sample_topp(logits: Float32Array, topp: number, probindex: { index:int,
 // }
 
 
+// fileState.ts
+let checkpointFile: File | null = null;
+
+export function setCheckpointFile(file: File) {
+    checkpointFile = file;
+}
+
+export function getCheckpointFile(): File | null {
+    return checkpointFile;
+}
+
+
 async function handleFiles() {
   const fileInputElement = document.getElementById('fileInput') as HTMLInputElement;
   const files = fileInputElement.files;
 
-  if (files) {
-    const checkpointFile = files[0]; // Assuming the first file is the checkpoint
-    const tokenizerFile = files[1]; // Assuming the second file is the tokenizer
-
-    try {
-      const { config, weights, vocab, vocab_scores } = await readFileOperations(checkpointFile, tokenizerFile);
-    } catch (e) {
-      console.error(e);
-    }
+  if (files && files.length > 0) {
+    const checkpointFile = files[0]; // Only the checkpoint file is needed
+      setCheckpointFile(files[0]);
   } else {
-    console.error("No files selected");
+    console.error("No checkpoint file selected");
   }
-  
 }
 
 async function processPrompt() {
   const promptInputElement = document.getElementById('promptInput') as HTMLInputElement;
   const prompt = promptInputElement.value;
 
-  // You might want to check if the prompt is empty
   if (!prompt) {
     console.error("Please enter a prompt.");
     return;
   }
 
-  const fileInputElement = document.getElementById('fileInput') as HTMLInputElement;
-  const files = fileInputElement.files;
+  // Use the checkpoint file selected by handleFiles
+  const checkpointFile = getCheckpointFile();
 
-  if (files && files.length >= 2) {
-    const checkpointFile = files[0]; // Assuming the first file is the checkpoint
-    const tokenizerFile = files[1]; // Assuming the second file is the tokenizer
-
+  if (checkpointFile) {
     try {
-      const { config, weights, vocab, vocab_scores } = await readFileOperations(checkpointFile, tokenizerFile);
+      const { config, weights, vocab, vocab_scores } = await readFileOperations(checkpointFile);
       main(config, weights, vocab, vocab_scores, { prompt: prompt });
     } catch (e) {
       console.error(e);
     }
   } else {
-    console.error("Please select the necessary files.");
+    console.error("Checkpoint file not selected.");
   }
 }
 
-
-async function readFileOperations(checkpointFile, tokenizerFile) {
+async function readFileOperations(checkpointFile) {
   const configSize = 7 * i32bytes;
 
   // Read the config header
@@ -557,8 +557,12 @@ async function readFileOperations(checkpointFile, tokenizerFile) {
   let weightsBuffer = await checkpointFile.slice(configSize).arrayBuffer();
   let weights = readWeights(config, new ArrayBufferReader(weightsBuffer), config.shared_weights);
 
-  // Read the tokenizer file
-  let tokenizerBuffer = await tokenizerFile.arrayBuffer();
+  // Fetch the tokenizer file from the root directory
+  const response = await fetch('/tokenizer.bin');
+  if (!response.ok) {
+    throw new Error('Failed to load tokenizer.bin');
+  }
+  let tokenizerBuffer = await response.arrayBuffer();
   let tokBuffer = new ArrayBufferReader(tokenizerBuffer);
 
   let vocab = new Array<string>(config.vocab_size);
