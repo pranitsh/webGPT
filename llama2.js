@@ -11,6 +11,7 @@ class BufferReader {
     constructor(arrayBuffer) {
         this.view = new DataView(arrayBuffer);
         this.position = 0;
+        console.log("New buffer array");
     }
     getInt32LE() {
         let value = this.view.getInt32(this.position, true);
@@ -60,6 +61,7 @@ class ArrayBufferReader {
         this.buffer = arrayBuffer;
         this.position = offset;
         this.view = new DataView(arrayBuffer);
+        console.log("New array buffer array");
     }
     getF32Array(...dims) {
         const totalFloats = dims.reduce((a, b) => a * b);
@@ -406,10 +408,12 @@ function sample_topp(logits, topp, probindex) {
 async function storeCheckpointFile(file) {
     return new Promise((resolve, reject) => {
         const openRequest = indexedDB.open('MyDatabase', 1);
+        console.log("Opened indexdb");
         openRequest.onupgradeneeded = function () {
             const db = openRequest.result;
             if (!db.objectStoreNames.contains('files')) {
                 db.createObjectStore('files', { keyPath: 'id' });
+                console.log("performed create object store");
             }
         };
         openRequest.onerror = function () {
@@ -420,6 +424,7 @@ async function storeCheckpointFile(file) {
             const transaction = db.transaction('files', 'readwrite');
             const filesStore = transaction.objectStore('files');
             const request = filesStore.put({ id: 'checkpointFile', file: file });
+            console.log("successfully saved file to db");
             request.onsuccess = function () {
                 resolve(request.result);
             };
@@ -432,6 +437,7 @@ async function storeCheckpointFile(file) {
 async function retrieveCheckpointFile() {
     return new Promise((resolve, reject) => {
         const openRequest = indexedDB.open('MyDatabase', 1);
+        console.log("opened db");
         openRequest.onerror = function () {
             reject(openRequest.error);
         };
@@ -441,6 +447,7 @@ async function retrieveCheckpointFile() {
             const filesStore = transaction.objectStore('files');
             const request = filesStore.get('checkpointFile');
             request.onsuccess = function () {
+                console.log("succesfully retrieved file from dv");
                 resolve(request.result.file);
             };
             request.onerror = function () {
@@ -452,6 +459,7 @@ async function retrieveCheckpointFile() {
 // fileState.ts
 let checkpointFile = null;
 export async function setCheckpointFile(file) {
+    console.log("started set checkpoint file");
     checkpointFile = file;
     await storeCheckpointFile(file); // Assuming storeCheckpointFile is your IndexedDB storage function
 }
@@ -473,9 +481,11 @@ export async function getCheckpointFile() {
 async function handleFiles() {
     const fileInputElement = document.getElementById('fileInput');
     const files = fileInputElement.files;
+    console.log("handling file");
     if (files && files.length > 0) {
         const checkpointFile = files[0]; // Only the checkpoint file is needed
         setCheckpointFile(files[0]);
+        console.log("Uploaded file without error");
     }
     else {
         console.error("No checkpoint file selected");
@@ -630,7 +640,7 @@ function main(config, weights, vocab, vocab_scores, prompt) {
         }
         // following BOS (1) token, sentencepiece decoder strips any leading whitespace (see PR#89)
         let token_str = (token == 1 && vocab[next].charAt(0) == ' ') ? vocab[next].substring(1) : vocab[next];
-        document.write(token_str); // note: assumes utf8 terminal
+        console.log(token_str); // note: assumes utf8 terminal
         token = next;
         // init the timer here because the first iteration can be slower
         if (start == 0)

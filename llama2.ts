@@ -20,6 +20,7 @@ class BufferReader {
   constructor(arrayBuffer: ArrayBuffer) {
     this.view = new DataView(arrayBuffer);
     this.position = 0;
+    console.log("New buffer array");
   }
 
   getInt32LE(): number {
@@ -80,6 +81,7 @@ class ArrayBufferReader {
     this.buffer = arrayBuffer;
     this.position = offset;
     this.view = new DataView(arrayBuffer);
+    console.log("New array buffer array");
   }
 
   getF32Array(...dims: number[]): Float32Array {
@@ -500,11 +502,13 @@ function sample_topp(logits: Float32Array, topp: number, probindex: { index:int,
 async function storeCheckpointFile(file) {
   return new Promise((resolve, reject) => {
       const openRequest = indexedDB.open('MyDatabase', 1);
+      console.log("Opened indexdb");
 
       openRequest.onupgradeneeded = function() {
           const db = openRequest.result;
           if (!db.objectStoreNames.contains('files')) {
-              db.createObjectStore('files', { keyPath: 'id' });
+            db.createObjectStore('files', { keyPath: 'id' });
+            console.log("performed create object store");
           }
       };
 
@@ -517,6 +521,7 @@ async function storeCheckpointFile(file) {
           const transaction = db.transaction('files', 'readwrite');
           const filesStore = transaction.objectStore('files');
           const request = filesStore.put({ id: 'checkpointFile', file: file });
+          console.log("successfully saved file to db");
 
           request.onsuccess = function() {
               resolve(request.result);
@@ -533,6 +538,7 @@ async function storeCheckpointFile(file) {
 async function retrieveCheckpointFile(): Promise<File | null> {
   return new Promise((resolve, reject) => {
       const openRequest = indexedDB.open('MyDatabase', 1);
+      console.log("opened db");
 
       openRequest.onerror = function() {
           reject(openRequest.error);
@@ -545,7 +551,8 @@ async function retrieveCheckpointFile(): Promise<File | null> {
           const request = filesStore.get('checkpointFile');
 
           request.onsuccess = function() {
-              resolve(request.result.file);
+            console.log("succesfully retrieved file from dv");
+            resolve(request.result.file);
           };
 
           request.onerror = function() {
@@ -559,16 +566,19 @@ async function retrieveCheckpointFile(): Promise<File | null> {
 let checkpointFile: File | null = null;
 
 export async function setCheckpointFile(file: File) {
-    checkpointFile = file;
-    await storeCheckpointFile(file); // Assuming storeCheckpointFile is your IndexedDB storage function
+  console.log("started set checkpoint file");
+  checkpointFile = file;
+  await storeCheckpointFile(file); // Assuming storeCheckpointFile is your IndexedDB storage function
 }
 
 export async function getCheckpointFile(): Promise<File | null> {
   if (checkpointFile) {
-      return checkpointFile; // Return from memory if available
+    console.log("file in state!");
+    return checkpointFile; // Return from memory if available
   } else {
       // Try to retrieve from IndexedDB
       try {  
+        console.log("retrieving from db!");
         return await retrieveCheckpointFile();
       } catch (error) {
           console.error("Error retrieving file from IndexedDB:", error);
@@ -580,11 +590,13 @@ export async function getCheckpointFile(): Promise<File | null> {
 async function handleFiles() {
   const fileInputElement = document.getElementById('fileInput') as HTMLInputElement;
   const files = fileInputElement.files;
+  console.log("handling file");
 
   if (files && files.length > 0) {
     const checkpointFile = files[0]; // Only the checkpoint file is needed
       setCheckpointFile(files[0]);
-  } else {
+      console.log("Uploaded file without error");
+    } else {
     console.error("No checkpoint file selected");
   }
 }
@@ -592,6 +604,8 @@ async function handleFiles() {
 async function processPrompt() {
   const promptInputElement = document.getElementById('promptInput') as HTMLInputElement;
   const prompt = promptInputElement.value;
+  console.log("called prompt and got value below:");
+  console.log(prompt);
 
   if (!prompt) {
     console.error("Please enter a prompt.");
@@ -604,7 +618,9 @@ async function processPrompt() {
   if (checkpointFile) {
     try {
       const { config, weights, vocab, vocab_scores } = await readFileOperations(checkpointFile);
+      console.log("successfully got config, weights, vocab, vocab_scores");
       main(config, weights, vocab, vocab_scores, { prompt: prompt });
+      console.log("just ran main from processPrompt");
     } catch (e) {
       console.error(e);
     }
@@ -640,9 +656,9 @@ async function readFileOperations(checkpointFile) {
     vocab[i] = new TextDecoder().decode(tokBuffer.getBytesInto(new Uint8Array(tokBuffer.getInt32LE())));
   }
 
+  console.log("performed reading");
   return { config, weights, vocab, vocab_scores };
 }
-
 
 // async function readFileOperations(combinedFile) {
 //   const configSize = 7 * i32bytes;
