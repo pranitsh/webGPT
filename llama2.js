@@ -458,18 +458,20 @@ async function retrieveCheckpointFile() {
 }
 // fileState.ts
 let checkpointFile = null;
-export async function setCheckpointFile(file) {
+async function setCheckpointFile(file) {
     console.log("started set checkpoint file");
     checkpointFile = file;
     await storeCheckpointFile(file); // Assuming storeCheckpointFile is your IndexedDB storage function
 }
-export async function getCheckpointFile() {
+async function getCheckpointFile() {
     if (checkpointFile) {
+        console.log("file in state!");
         return checkpointFile; // Return from memory if available
     }
     else {
         // Try to retrieve from IndexedDB
         try {
+            console.log("retrieving from db!");
             return await retrieveCheckpointFile();
         }
         catch (error) {
@@ -494,6 +496,8 @@ async function handleFiles() {
 async function processPrompt() {
     const promptInputElement = document.getElementById('promptInput');
     const prompt = promptInputElement.value;
+    console.log("called prompt and got value below:");
+    console.log(prompt);
     if (!prompt) {
         console.error("Please enter a prompt.");
         return;
@@ -503,7 +507,9 @@ async function processPrompt() {
     if (checkpointFile) {
         try {
             const { config, weights, vocab, vocab_scores } = await readFileOperations(checkpointFile);
+            console.log("successfully got config, weights, vocab, vocab_scores");
             main(config, weights, vocab, vocab_scores, { prompt: prompt });
+            console.log("just ran main from processPrompt");
         }
         catch (e) {
             console.error(e);
@@ -535,6 +541,7 @@ async function readFileOperations(checkpointFile) {
         vocab_scores[i] = tokBuffer.getFloat32LE();
         vocab[i] = new TextDecoder().decode(tokBuffer.getBytesInto(new Uint8Array(tokBuffer.getInt32LE())));
     }
+    console.log("performed reading");
     return { config, weights, vocab, vocab_scores };
 }
 // async function readFileOperations(combinedFile) {

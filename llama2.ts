@@ -565,13 +565,13 @@ async function retrieveCheckpointFile(): Promise<File | null> {
 // fileState.ts
 let checkpointFile: File | null = null;
 
-export async function setCheckpointFile(file: File) {
+async function setCheckpointFile(file: File) {
   console.log("started set checkpoint file");
   checkpointFile = file;
   await storeCheckpointFile(file); // Assuming storeCheckpointFile is your IndexedDB storage function
 }
 
-export async function getCheckpointFile(): Promise<File | null> {
+async function getCheckpointFile(): Promise<File | null> {
   if (checkpointFile) {
     console.log("file in state!");
     return checkpointFile; // Return from memory if available
