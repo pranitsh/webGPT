@@ -584,14 +584,6 @@
         is_generating = false;
     }
 
-    async function init(model = '/stories15m.bin', tokenizer = 'tokenizer.bin') {
-        initDB();
-        const response = await fetch(model);
-        await load_model(await response.arrayBuffer());
-        await load_vocab(tokenizer);
-        generate();
-    }
-
     document.querySelector('#run').addEventListener('click', generate);
 
     async function handleFiles() {
@@ -601,7 +593,8 @@
         if (files && files.length > 0) {
             const checkpointFile = files[0]; // Only the checkpoint file is needed
             console.log("Selected file: " + checkpointFile.name); // Log the name of the file
-            await load_model(files[0].arrayBuffer());
+            const buffer = await checkpointFile.arrayBuffer(); // Correctly call arrayBuffer() as a method
+            await load_model(buffer);
             await load_vocab('tokenizer.bin');
             console.log("Uploaded file without error");
         }
@@ -610,6 +603,4 @@
         }
         generate();
     }
-
-    init();
 </script>
