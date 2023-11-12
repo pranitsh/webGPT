@@ -527,12 +527,12 @@
         generate();
     }
 
-    document.querySelector('#run').addEventListener('click', generate);
+    // document.querySelector('#run').addEventListener('click', generate);
     // select another model
-    document.querySelector('#model').addEventListener('change', async function() {
-        await load_model(this.value + '.bin');
-        generate();
-    });
+    // document.querySelector('#model').addEventListener('change', async function() {
+    //     await load_model(this.value + '.bin');
+    //     generate();
+    // });
 
     async function handleFiles() {
         const fileInputElement = document.getElementById('fileInput');
@@ -550,5 +550,5 @@
         generate();
     }
 
-    init();
+    // init();
 </script>
