@@ -1,30 +1,79 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<!-- https://github.com/karpathy/llama2.c#notable-forks -->
-<title>llama2.js</title>
-<style>
-    body {
-        padding: 1em;
-    }
-    label, button {
-        margin: 0.5em;
-    }
-    input {
-        width: 15em;
-    }
-    textarea {
-        padding: 1em;
-    }
-</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>llama2.js</title>
+    <style>
+        body {
+            padding: 1em;
+            background-color: #0A2239;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .download-links {
+            margin-bottom: 2em;
+        }
+        a {
+            color: #FF5964;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        label, button {
+            margin: 0.5em;
+            color: white;
+        }
+        input[type="file"] {
+            display: none; /* Hide the default file input */
+        }
+        .file-upload-btn {
+            display: inline-block;
+            padding: 0.5em 1em;
+            background-color: #FF5964;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .file-upload-btn:hover {
+            background-color: #D94F5C;
+        }
+        input, textarea, button {
+            background-color: #1B2A41;
+            border: none;
+            color: white;
+            padding: 0.5em;
+            border-radius: 5px;
+            height: auto;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #FF5964;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #D94F5C;
+        }
+        #allinputs {
+            display: flex;        /* Use flexbox layout */
+            flex-direction: column; /* Stack children vertically */
+            align-items: flex-start; /* Align items to the start of the flex container */
+        }
+    </style>
+</head>
 <body>
-    <div>
+    <div class="download-links">
         <p>Download the models at the below links!</p>
         <a href="https://huggingface.co/karpathy/tinyllamas/resolve/main/stories15M.bin">Download stories15M.bin</a><br>
         <a href="https://huggingface.co/karpathy/tinyllamas/resolve/main/stories42M.bin">Download stories42M.bin</a><br>
         <a href="https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin">Download stories110M.bin</a>
     </div>
-    <div>    
+    <div>
         <input type="file" id="fileInput" onchange="handleFiles()">
+        <label for="fileInput" class="file-upload-btn">Open Model File and Generate</label>
     </div>
     <div>
         <label>top-p</label><input id="top-p" type="number" value="1.0" step="0.1">
@@ -32,7 +81,7 @@
         <label>steps</label><input id="steps" type="number" value="100">
         <button id="run">run</button>
         <div id="allinputs">
-            <textarea class="prompt" type="text" value="" cols="80" rows="1" placeholder="One day"></textarea>
+            <textarea class="prompt" oninput="adjustTextAreaHeight(this)" type="text" value="" cols="80" rows="1" placeholder="One day"></textarea>
         </div>
     </div>
     <textarea id="output" rows="20" cols="80"></textarea>
@@ -586,13 +635,14 @@
         document.querySelector('#toks').textContent = avg.toFixed(4);
         is_generating = false;
         addNewTextArea(document.querySelector('#output').value);
+        document.querySelector('#output').value = "";
     }
 
 
     // Function to add a new textarea
     function addNewTextArea(text) {
-        // Select the div by its id or class
-        var div = document.getElementById('allinputs'); // Replace 'yourDivId' with the actual id of your div
+        // Select the div by its id
+        var div = document.getElementById('allinputs'); 
 
         // Create a new textarea element
         var newTextArea = document.createElement('textarea');
@@ -600,11 +650,20 @@
         newTextArea.rows = 1;
         newTextArea.placeholder = "One day";
         newTextArea.value = text;
-        newTextArea.className = "prompt";
+        newTextArea.rows = 5;
 
+        // Assign the adjustTextAreaHeight function to the oninput event
+        newTextArea.oninput = function() {
+            adjustTextAreaHeight(this);
+        };
 
         // Append the new textarea to the div
         div.appendChild(newTextArea);
+    }
+
+    function adjustTextAreaHeight(textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = (textarea.scrollHeight) + 'px';
     }
 
     document.querySelector('#run').addEventListener('click', generate);
@@ -627,3 +686,4 @@
         generate();
     }
 </script>
+</html>
