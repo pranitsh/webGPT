@@ -26,14 +26,14 @@
     <div>    
         <input type="file" id="fileInput" onchange="handleFiles()">
     </div>
-        <div>
-        <div>
-            <textarea id="prompt" type="text" value="" cols="80" rows="1" placeholder="One day"></textarea>
-        </div>
+    <div>
         <label>top-p</label><input id="top-p" type="number" value="1.0" step="0.1">
         <label>temperature</label><input id="temperature" type="number" value="0.9" step="0.1">
         <label>steps</label><input id="steps" type="number" value="100">
         <button id="run">run</button>
+        <div id="allinputs">
+            <textarea class="prompt" type="text" value="" cols="80" rows="1" placeholder="One day"></textarea>
+        </div>
     </div>
     <textarea id="output" rows="20" cols="80"></textarea>
     <p><span>achieved tok/s: </span><span id="toks"></span></p>
@@ -524,9 +524,12 @@
         let next = 0;
         let token = 1; // 1 = BOS token in Llama-2 sentencepiece
         let topp = parseFloat(document.querySelector('#top-p').value);
-        document.querySelector('#output').value += "<s>\n"; // explicit print the initial BOS token (=1), stylistically symmetric
-
-        const prompt = document.querySelector('#prompt').value;
+        var prompts = document.querySelectorAll('.prompt');
+        console.log(prompts);
+        var nonEmptyPrompts = Array.from(prompts).filter(textarea => textarea.value.trim() !== '');
+        var promptValues = nonEmptyPrompts.map(textarea => textarea.value);
+        var prompt = promptValues.join('\n');
+        console.log(prompt);
         let num_prompt_tokens = 0;
         let prompt_tokens;
         if (prompt) {
@@ -582,6 +585,26 @@
         const avg = elpased.reduce((a, b) => a + b) / elpased.length;
         document.querySelector('#toks').textContent = avg.toFixed(4);
         is_generating = false;
+        addNewTextArea(document.querySelector('#output').value);
+    }
+
+
+    // Function to add a new textarea
+    function addNewTextArea(text) {
+        // Select the div by its id or class
+        var div = document.getElementById('allinputs'); // Replace 'yourDivId' with the actual id of your div
+
+        // Create a new textarea element
+        var newTextArea = document.createElement('textarea');
+        newTextArea.cols = 80;
+        newTextArea.rows = 1;
+        newTextArea.placeholder = "One day";
+        newTextArea.value = text;
+        newTextArea.className = "prompt";
+
+
+        // Append the new textarea to the div
+        div.appendChild(newTextArea);
     }
 
     document.querySelector('#run').addEventListener('click', generate);
