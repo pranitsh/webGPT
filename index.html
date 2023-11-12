@@ -17,16 +17,13 @@
     }
 </style>
 <body>
-    <div>
+    <div>    
+        <input type="file" id="fileInput" onchange="handleFiles()">
+    </div>
+        <div>
         <div>
             <textarea id="prompt" type="text" value="" cols="80" rows="1" placeholder="One day"></textarea>
         </div>
-        <select id="model">
-            <option value="stories15m">stories15m</option>
-            <option value="stories42m">stories42m</option>
-            <option value="stories110m">stories110m</option>
-        </select>
-
         <label>top-p</label><input id="top-p" type="number" value="1.0" step="0.1">
         <label>temperature</label><input id="temperature" type="number" value="0.9" step="0.1">
         <label>steps</label><input id="steps" type="number" value="100">
@@ -34,10 +31,6 @@
     </div>
     <textarea id="output" rows="20" cols="80"></textarea>
     <p><span>achieved tok/s: </span><span id="toks"></span></p>
-    <div>    
-        <input type="file" id="fileInput" multiple>
-        <button onclick="handleFiles()">Load Files</button>
-    </div>
 </body>
 <script>
     // About this code
@@ -47,12 +40,77 @@
     let is_generating = false;
 
     // ----------------------------------------------------------------------------
+    // Database initialization
+
+    let db;
+
+    function initDB() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("MyDatabase", 1);
+
+            request.onerror = (event) => {
+                console.error("Database error: " + event.target.errorCode);
+                reject("Database error: " + event.target.errorCode);
+            };
+
+            request.onsuccess = (event) => {
+                db = event.target.result;
+                resolve(db);
+            };
+
+            request.onupgradeneeded = (event) => {
+                const db = event.target.result;
+                db.createObjectStore("data", { keyPath: "id" });
+            };
+        });
+    }
+
+    function saveToDB(config, vocab, vocab_scores, weights, run_state) {
+        return new Promise((resolve, reject) => {
+            const transaction = db.transaction(["data"], "readwrite");
+            const store = transaction.objectStore("data");
+            const items = [
+                { id: "config", value: config },
+                { id: "vocab", value: vocab },
+                { id: "vocab_scores", value: vocab_scores },
+                { id: "weights", value: weights },
+                { id: "run_state", value: run_state }
+            ];
+
+            Promise.all(items.map(item => {
+                return new Promise((resolve, reject) => {
+                    const request = store.put(item);
+                    request.onsuccess = () => resolve();
+                    request.onerror = (e) => reject("Error saving item: " + e.target.errorCode);
+                });
+            })).then(resolve).catch(reject);
+        });
+    }
+
+    function retrieveFromDB() {
+        return new Promise((resolve, reject) => {
+            const transaction = db.transaction(["data"], "readonly");
+            const store = transaction.objectStore("data");
+            const keys = ["config", "vocab", "vocab_scores", "weights", "run_state"];
+            let results = {};
+
+            Promise.all(keys.map(key => {
+                return new Promise((resolve, reject) => {
+                    const request = store.get(key);
+                    request.onsuccess = () => {
+                        results[key] = request.result ? request.result.value : null;
+                        resolve();
+                    };
+                    request.onerror = (e) => reject("Error retrieving item: " + e.target.errorCode);
+                });
+            })).then(() => resolve(results)).catch(reject);
+        });
+    }
+
+    // ----------------------------------------------------------------------------
     // initialization: read from checkpoint
 
-    async function load_model(path) {
-        const response = await fetch(path);
-        const arrayBuffer = await response.arrayBuffer();
-        
+    async function load_model(arrayBuffer) {
         let offset = 0;
 
         config = {
@@ -121,55 +179,6 @@
         };
     }
 
-
-    async function fetchGGUF(url) {
-        const response = await fetch(url);
-        const arrayBuffer = await response.arrayBuffer();
-        return new DataView(arrayBuffer);
-    }
-
-    function readBigInt64BE(dataView, offset) {
-        // JavaScript DataView does not support BigInt64 in Big Endian directly
-        // This is a workaround to read BigInt64BE from a DataView
-        const left = dataView.getUint32(offset) * 2 ** 32;
-        const right = dataView.getUint32(offset + 4);
-        return BigInt(left + right);
-    }
-
-    function readUInt32BE(dataView, offset) {
-        return dataView.getUint32(offset);
-    }
-
-    function readFloat32BE(dataView, offset) {
-        return dataView.getFloat32(offset);
-    }
-
-    async function processGGUFModel(url) {
-        const dataView = await fetchGGUF(url);
-
-        // Example of reading data. Adjust these based on the actual GGUF structure
-        let offset = 0;
-        const magic = readUInt32BE(dataView, offset);
-        offset += 4;
-        const version = readUInt32BE(dataView, offset);
-        offset += 4;
-
-        // Continue reading other parts of the file based on your file structure
-        // ...
-
-        // Return or process data as needed
-        return { magic, version /*, other extracted data... */ };
-    }
-
-    // Usage
-    const ggufUrl = 'path/to/your/gguf/file.gguf';
-    processGGUFModel(ggufUrl).then(data => {
-        console.log(data);
-        // Further processing...
-    });
-
-
-    
     async function load_vocab(path) {
         const response = await fetch(path);
         const arrayBuffer = await response.arrayBuffer();
@@ -569,19 +578,15 @@
         is_generating = false;
     }
 
-    async function init() {
-        await load_model('stories15m.bin');
-        await load_vocab('tokenizer.bin');
-
+    async function init(model = '/stories15m.bin', tokenizer = 'tokenizer.bin') {
+        initDB();
+        const response = await fetch(model);
+        await load_model(await response.arrayBuffer());
+        await load_vocab(tokenizer);
         generate();
     }
 
-    // document.querySelector('#run').addEventListener('click', generate);
-    // select another model
-    // document.querySelector('#model').addEventListener('change', async function() {
-    //     await load_model(this.value + '.bin');
-    //     generate();
-    // });
+    document.querySelector('#run').addEventListener('click', generate);
 
     async function handleFiles() {
         const fileInputElement = document.getElementById('fileInput');
@@ -590,7 +595,8 @@
         if (files && files.length > 0) {
             const checkpointFile = files[0]; // Only the checkpoint file is needed
             console.log("Selected file: " + checkpointFile.name); // Log the name of the file
-            load_model(files[0].name);
+            await load_model(files[0].arrayBuffer());
+            await load_vocab('tokenizer.bin');
             console.log("Uploaded file without error");
         }
         else {
@@ -599,5 +605,5 @@
         generate();
     }
 
-    // init();
+    init();
 </script>
