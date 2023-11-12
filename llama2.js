@@ -630,7 +630,7 @@ function main(config, weights, vocab, vocab_scores, prompt) {
         }
         // following BOS (1) token, sentencepiece decoder strips any leading whitespace (see PR#89)
         let token_str = (token == 1 && vocab[next].charAt(0) == ' ') ? vocab[next].substring(1) : vocab[next];
-        console.log(token_str); // note: assumes utf8 terminal
+        document.write(token_str); // note: assumes utf8 terminal
         token = next;
         // init the timer here because the first iteration can be slower
         if (start == 0)
