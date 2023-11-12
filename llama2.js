@@ -403,13 +403,72 @@ function sample_topp(logits, topp, probindex) {
 //   }
 //   return { config, weights, vocab, vocab_scores };
 // }
+async function storeCheckpointFile(file) {
+    return new Promise((resolve, reject) => {
+        const openRequest = indexedDB.open('MyDatabase', 1);
+        openRequest.onupgradeneeded = function () {
+            const db = openRequest.result;
+            if (!db.objectStoreNames.contains('files')) {
+                db.createObjectStore('files', { keyPath: 'id' });
+            }
+        };
+        openRequest.onerror = function () {
+            reject(openRequest.error);
+        };
+        openRequest.onsuccess = function () {
+            const db = openRequest.result;
+            const transaction = db.transaction('files', 'readwrite');
+            const filesStore = transaction.objectStore('files');
+            const request = filesStore.put({ id: 'checkpointFile', file: file });
+            request.onsuccess = function () {
+                resolve(request.result);
+            };
+            request.onerror = function () {
+                reject(request.error);
+            };
+        };
+    });
+}
+async function retrieveCheckpointFile() {
+    return new Promise((resolve, reject) => {
+        const openRequest = indexedDB.open('MyDatabase', 1);
+        openRequest.onerror = function () {
+            reject(openRequest.error);
+        };
+        openRequest.onsuccess = function () {
+            const db = openRequest.result;
+            const transaction = db.transaction('files', 'readonly');
+            const filesStore = transaction.objectStore('files');
+            const request = filesStore.get('checkpointFile');
+            request.onsuccess = function () {
+                resolve(request.result.file);
+            };
+            request.onerror = function () {
+                reject(request.error);
+            };
+        };
+    });
+}
 // fileState.ts
 let checkpointFile = null;
-export function setCheckpointFile(file) {
+export async function setCheckpointFile(file) {
     checkpointFile = file;
+    await storeCheckpointFile(file); // Assuming storeCheckpointFile is your IndexedDB storage function
 }
-export function getCheckpointFile() {
-    return checkpointFile;
+export async function getCheckpointFile() {
+    if (checkpointFile) {
+        return checkpointFile; // Return from memory if available
+    }
+    else {
+        // Try to retrieve from IndexedDB
+        try {
+            return await retrieveCheckpointFile();
+        }
+        catch (error) {
+            console.error("Error retrieving file from IndexedDB:", error);
+            return null;
+        }
+    }
 }
 async function handleFiles() {
     const fileInputElement = document.getElementById('fileInput');
